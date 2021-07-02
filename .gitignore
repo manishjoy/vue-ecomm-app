@@ -1,0 +1,23 @@
+/ecomm/.DS_Store
+/ecomm/node_modules
+/ecomm/dist
+
+
+# local env files
+/ecomm/.env.local
+/ecomm/.env.*.local
+
+# Log files
+/ecomm/npm-debug.log*
+/ecomm/yarn-debug.log*
+/ecomm/yarn-error.log*
+/ecomm/pnpm-debug.log*
+
+# Editor directories and files
+/ecomm/.idea
+/ecomm/.vscode
+/ecomm/*.suo
+/ecomm/*.ntvs*
+/ecomm/*.njsproj
+/ecomm/*.sln
+/ecomm/*.sw?
