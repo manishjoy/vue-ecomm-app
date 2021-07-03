@@ -7,6 +7,9 @@ import AxiosPlugin from 'vue-axios-cors';
 import VueRouter from 'vue-router'
 import {routes} from './router/routes'
 
+import Vuex from "vuex";
+ 
+Vue.use(Vuex);
 Vue.use(AxiosPlugin)
 Vue.use(BootstrapVue)
 /* Routers */
@@ -17,7 +20,22 @@ const router = new VueRouter({
 })
 Vue.config.productionTip = false
 
+const store = new Vuex.Store({
+  state: {
+    cartNum: 0,
+    isLoggedIn: false,
+  },
+  getters: {
+    getCartCount (state) {
+      return state.cartNum
+    }
+  },
+  mutations: {},
+  actions: {}
+})
+
 new Vue({
   render: h => h(App),
-  router: router
+  router: router,
+  store: store
 }).$mount('#app')

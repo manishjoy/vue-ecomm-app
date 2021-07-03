@@ -20,7 +20,7 @@
             <div class="login-form-container">
                 <form @submit="sendData">
                     <div class="form-group">
-                        <label for="email">Name:</label>
+                        <label for="name">Name:</label>
                         <input type="text" ref="name" class="form-control" required placeholder="Enter name" id="name">
                     </div>
                     <div class="form-group">
@@ -78,6 +78,7 @@ export default {
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('user_data', JSON.stringify(response.data.user_data));
                     this.createEmptyCart(response.data.token);
+                    this.$store.state.isLoggedIn = true;
                     this.$router.push('/');
                 }
                 console.log(response.data);

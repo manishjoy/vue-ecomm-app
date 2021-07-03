@@ -31,9 +31,10 @@
                                 </div>
                                 <div class="m-bot15"> <strong>Price : </strong><span class="pro-price">{{currenySymbol}} {{productData.price}}</span></div>
                                 <form class="addtocart-form" @submit="addToCart">
-                                    <input type="hidden" ref="productid" name="productid" :value="productData.id">
+                                    <!-- <input type="hidden" ref="productid" name="productid" :value="productData.id">
                                     <input type="hidden" ref="product_name" name="product_name" :value="productData.title">
-                                    <input type="hidden" ref="price" name="price" :value="productData.price">
+                                    <input type="hidden" ref="product_image" name="product_image" :value="productData.image">
+                                    <input type="hidden" ref="price" name="price" :value="productData.price"> -->
                                     <div class="form-group">
                                         <label for="quantity">Quantity:</label>
                                         <input type="number" ref="quantity" value="1" min="1" class="form-control quantity" required placeholder="" id="quantity">
@@ -71,16 +72,15 @@ export default {
         addToCart(e) {
             e.preventDefault();
             var cart = JSON.parse(localStorage.getItem('cart'));
-            var checkItem = this.in_array(this.$refs.productid.value, cart.items);
+            var checkItem = this.in_array(this.productData.id, cart.items);
             if (checkItem.exists) {
-                console.log('tetstt', this.$refs.quantity.value, cart.items, checkItem.index);
                 cart.items[checkItem.index].qty = parseInt(cart.items[checkItem.index].qty) + parseInt(this.$refs.quantity.value);
-                cart.items[checkItem.index].price = parseFloat(cart.items[checkItem.index].price) + parseFloat(this.$refs.price.value) * parseInt(this.$refs.quantity.value);
+                cart.items[checkItem.index].price = parseFloat(cart.items[checkItem.index].price) + parseFloat(this.productData.price) * parseInt(this.$refs.quantity.value);
             } else {
-                var cartData = {'id': this.$refs.productid.value, 'name': this.$refs.product_name.value, 'price': parseFloat(this.$refs.price.value) * parseInt(this.$refs.quantity.value), 'qty': this.$refs.quantity.value };
+                var cartData = {'id': this.productData.id, 'name': this.productData.title, 'image': this.productData.image, 'price': parseFloat(this.productData.price) * parseInt(this.$refs.quantity.value), 'qty': this.$refs.quantity.value };
                 cart.items.push(cartData);
             }
-            
+            this.$store.state.cartNum = parseInt(this.$store.state.cartNum) + 1;
             localStorage.setItem('cart', JSON.stringify(cart));
         },
         in_array(id, array) {

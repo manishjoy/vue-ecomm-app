@@ -43,7 +43,6 @@ export default {
     methods: {
         handleCategoryFilter(filterData) {
             this.categoryFilter = filterData
-            console.log(filterData, 'testttt');
             this.getProducts()
         },
         async getProducts() {
@@ -54,7 +53,6 @@ export default {
                 if (this.categoryFilter && this.categoryFilter.length) {
                     url += '/category/'+ this.categoryFilter
                 }
-                console.log(url, 'testttt');
                 var response = await axios.get(url)
                 console.log(response.data);
                 this.products = response.data
